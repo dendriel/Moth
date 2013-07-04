@@ -49,5 +49,9 @@ update screen step does is shown in the next flowchart.
 
 
 === Sleep Interval ===
-//TODO// Talk about the FPS
+
+The sleep internval time is defined at the module initialization. The FPS parameter passed to the
+init function will be divided and the result stored at the shared memory of the processor. When
+starting the thread will read the interval value and store at the function scope to constant use.
+
 

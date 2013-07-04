@@ -1,14 +1,14 @@
 
 == General Functions ==
 
- This section intends to give the user an overview about all the functionalities of the Moth
-processor, showing some actions like initialization, functions to operate and controle, and
+This section intends to give the user an overview about all the functionalities of the Moth
+Processor, showing some actions like initialization, functions to operate and control, and
 finishing the processor.
 
- The Moth Processor is "attached" on the use of the 
+The Moth Processor is "attached" on the use of the
 [Allegro library https://www.allegro.cc], thus is needed to initialize this library before
 starting the processor. With that, we can call the processor initialization function that
-will return a pthread_id as identifier to monitor and halt the processor. The initialization
+will return a ``pthread_id` as identifier to monitor and halt the processor. The initialization
 function prototype would be:
 
 ```
@@ -16,8 +16,11 @@ moth_initialize(screen_height, screen_width, frame_rate)
 ```
 
  Both the screen size and frame rate (or Frames Per Second - FPS) must be defined at the
-initialization. The frame rate will be divided by 1 and we will have the update interval time,
-used by the "screen update" thread as illustrated in latter sections.
+initialization. The frame rate will be divided by 1 and we will have the update interval time
+used by the Updater Thread (as illustrated in latter sections). Thus, any visual element updates
+must be spaced of ``1/FPS`` seconds, or else, some updates may take no effect. For example, if the
+FPS is 50, and an element is updated 2 times before "1/FPS = 20 ms", only the last update will be
+perceived by the updater thread, as it will update the screen only every 20 ms.
 
 
  To finalize the Moth Processor, is possible to use the finalize function, that will free the
