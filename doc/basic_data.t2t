@@ -42,6 +42,10 @@ more info);
 
 - [**tp**] Views - Number of views per position;
 
+- [**tp**] Current Position - The selected position to be displayed;
+
+- [**tp**] Current View - The selected view to be displayed;
+
 - [**tp**] Index - Used to access the ``viewpoints`` type "Viewpoints[Index]";
 
 - [**tp**] Interval time - For dynamic types, define the update ``viewpoints`` interval;
