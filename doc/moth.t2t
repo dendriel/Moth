@@ -3,6 +3,11 @@ Easy Gaming Video Processor
 
 [./img/logo.png]
 
+%!include: introduction.t2t
+
+=======================
+-----------------------
+-----------------------
 
 %!include: section_1.t2t
 
@@ -11,3 +16,9 @@ Easy Gaming Video Processor
 -----------------------
 
 %!include: section_2.t2t
+
+=======================
+-----------------------
+-----------------------
+
+%!include: references.t2t
