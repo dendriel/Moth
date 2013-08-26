@@ -1,17 +1,17 @@
 
 == Basic data ==
 
-This section presents and describes the data types and constants definitions used by the Moth
-Processor.
+This section presents and describes the data types and constants definitions used by the video
+processor.
 
 
 === Structures ===
 
 ==== Visual Elements ====
 
-The visual element is the base data type that is used by the Moth Processor. It represents a
-element that will be displayed in the screen, according with the data of his attributes. This data
-is basically represented as follow:
+The Visual Element is the base data type that is used by the processor. It represents an element
+that will be displayed in the screen, according with the data of his attributes. This data is
+basically represented as follow:
 
 - [**st**] Position - Position of the visual element in the screen;
 
@@ -22,7 +22,8 @@ is basically represented as follow:
 
 ==== Position ====
 
-This data type is used to hold the visual element horizontal and vertical positions in the screen.
+The Position data type is used to hold the visual element horizontal and vertical coordinates in the
+screen. His attributes are listed bellow:
 
 - [**tp**] X - The horizontal position of the element in the screen;
 
@@ -31,14 +32,15 @@ This data type is used to hold the visual element horizontal and vertical positi
 
 ==== View ====
 
-The View data type contains the images that the element owns, informations how this data will
+The View data type contains: the images that the element owns, informations how this data will
 be used and internal variables that are used in running time for control issues. The content of
 a View data type is the following:
 
 - [**tp**] Viewpoints -  Hold the element image viewpoints (see Type Definitions sub-section for
 more info);
 
-- [**tp**] Positions - Number of positions in the ``viewpoints`` attribute;
+- [**tp**] Positions - Number of positions in the ``viewpoints`` attribute (not related with the
+``position`` structure);
 
 - [**tp**] Views - Number of views per position;
 
@@ -50,34 +52,34 @@ more info);
 
 - [**tp**] Interval time - For dynamic types, define the update ``viewpoints`` interval;
 
-- [**tp**] Interval control - Used to "makes" the interval time. Each update screen loops has X 
+- [**tp**] Interval control - Used to "make" the interval time. Each update screen loops has X 
 milliseconds of interval. Each interval increments the control variable. When control*update_screen
 equals to interval time we have an update ``viewpoints`` event.
 
-- [**en**] Type - The type of the element that determines how the View data will be used;
+- [**en**] Type - The type of the element. Determines how the data from the ``view`` will be used;
 
 
 === Types Definitions ===
 
 ==== Viewpoints ====
 
-This type definitions is made from a ``BITMAP`` elements array, and is defined as follow.
+This data type, from the ``view`` data type, is made from an array of ``BITMAP`` elements and is
+defined as follow.
 
 ```
 BITMAP viewpoints[MAX_VIEWPOINTS]
 ```
 
-The ``viewpoints`` type is an abstraction to the user that will just pass this reference
-to the Moth Processorfunctions. These functions will split a raw BITMAP and fill the
-viewpoints position with splited images. After, the user can call any function to iteract over an
-element - or add one - and pass the "viewpoints" reference without doing anything by himself.
+The ``viewpoints`` type is an abstraction. The user will only need to pass a reference from a
+variable of this type and the processor functions will do the rest. These functions will split a raw
+``BITMAP`` and fill the ``viewpoints``.
 
 
 ==== Key ====
 
-The ``key`` is just an abstraction type that represents the visual element internally
-(to the system) and should be held by the user to have access and interact over an element. The
-definition of this type is made as follow.
+The Key (or Visual Key) is another abstraction type that address the ``visual element`` to the
+system. Must be held by the user to have access and interact over an element. The definition of this
+type is made as follow.
 
 ```
 unsigned int visual_key
@@ -87,27 +89,28 @@ unsigned int visual_key
 
 ==== Type ====
 
-``type`` is an enumeration that is used to informs the visual element types. The types that an
-visual element can assume is listed bellow.
+Type is an enumeration that is used to informs the visual element types. The types that an
+``visual element`` can assume is listed bellow.
 
-- Static - The element is static and will not be update unless the Moth Processor receives a
-requisition to do that.
+- Static - The element is static and will not have his ``viewpoint`` updated unless the processor
+receives a requisition to do that;
 
 - Dynamic - The element is dynamic and the processor will update the element ``viewpoint`` according
-with interval time from View data.
+with interval time from ``view`` data;
 
-- Animated - A kind of dynamic type. Will be described in latter sections.
+- Animated - A kind of dynamic type. Will be described in "Working on View data types";
 
-- Smooth - A kind of dynamic type. Will be described in latter sections.
+- Smooth - A kind of dynamic type. Will be described in "Working on View data types";
 
-- Overlay - A kind of dynamic type. Will be described in latter sections.
+- Overlay - A kind of dynamic type. Will be described in "Working on View data types".
 
 
 ==== Layer Priority ====
 
 The Layer Priority enumeration is used to define in what order the landscape visual elements will
-be drawn. The highest priority layer will be drawn first, the lowest will be draw by the last. The
-order applies to both under and over layer elements list. There is five priorities listed below:
+be drawn (see "Layers Facility" section). The highest priority layer will be drawn first, the lowest
+will be draw by the last. The order applies to both under and over layer elements list. There is
+five priorities listed below:
 
 - //priority_1// - The highest priority. The element in this position will be draw first;
 
@@ -123,11 +126,11 @@ draw by the last;
 
 === Constants ===
 
- Some constants that can be used when interacting with the Moth Processor.
+Some constants that can be used when interacting with the video processor.
 
-- **MAX_VIEWPOINTS** - The constant MAX_VIEWPOINTS that defines the maximum elements of
-``viewpoints`` type should initillay be about the size of 25. The count is 4 directions (up, right,
-down and left) plus 4 viewpoints (stand, left move, stand, right move), in addition to 9 extra
-positions to append whatever viewpoint the user want to do (emotions, dead body, transformations,
-etc).
+- **MAX_VIEWPOINTS** - The constant MAX_VIEWPOINTS defines the maximum elements of the
+``viewpoints`` type. Should initillay be about the size of 25. The count is: 4 directions (up,
+right, down and left) plus 4 view points (stand, left move, stand, right move), in addition to 9
+extra positions to append whatever viewpoint the user want to do (emotions, dead body,
+transformations, etc).
 
